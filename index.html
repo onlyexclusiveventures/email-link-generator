@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Link Generator</title>
+    <title>Create Your Google Drive Content Folder!</title>
     <!-- Add Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -96,6 +96,7 @@
             const email = document.getElementById('email').value.trim();
             if (email) {
                 const baseLink = "https://script.google.com/macros/s/AKfycbwEpu_sLkuayU9_KpwSzDxTja3HWBUSgyGQDjAz2kbhgHq47SkD1IirmSMq9RQv7EHUbw/exec?templateId=1R5LTOkFf4U6w6DLcdyHxm0li2otyT1Dd&email=";
+                // Generate the link and ensure proper encoding
                 const fullLink = baseLink + encodeURIComponent(email);
                 document.getElementById('output').innerHTML = `<a href="${fullLink}" target="_blank">Click here to create your folder</a>`;
             } else {
@@ -105,3 +106,4 @@
     </script>
 </body>
 </html>
+
