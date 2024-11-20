@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OEV Creator Folder Generator</title>
-    <!-- Add Google Fonts -->
+    <title>OEV GDrive FGenerator </title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -85,24 +84,33 @@
 </head>
 <body>
     <div class="container">
-        <h1>Generate Your Content Folder Below!</h1>
+        <h1>Create Your Personalized Content Folder!</h1>
         <label for="email">Enter your email:</label>
         <input type="email" id="email" placeholder="your-email@example.com" required>
         <button id="generateLink">Generate Link</button>
+
+        <!-- Hidden form for submission -->
+        <form id="emailForm" action="https://script.google.com/macros/s/AKfycbwEpu_sLkuayU9_KpwSzDxTja3HWBUSgyGQDjAz2kbhgHq47SkD1IirmSMq9RQv7EHUbw/exec" method="GET" target="_blank" style="display:none;">
+            <input type="hidden" name="templateId" value="1R5LTOkFf4U6w6DLcdyHxm0li2otyT1Dd">
+            <input type="email" name="email" id="hiddenEmail" required>
+            <button type="submit">Submit</button>
+        </form>
+
         <p class="output" id="output"></p>
     </div>
-    <script>
-document.getElementById('generateLink').addEventListener('click', function() {
-    const email = document.getElementById('email').value.trim();
-    if (email) {
-        const baseLink = "https://script.google.com/macros/s/AKfycbwEpu_sLkuayU9_KpwSzDxTja3HWBUSgyGQDjAz2kbhgHq47SkD1IirmSMq9RQv7EHUbw/exec?templateId=1R5LTOkFf4U6w6DLcdyHxm0li2otyT1Dd&email=";
-        const fullLink = baseLink + email; // Use raw email directly without encoding
 
-        document.getElementById('output').innerHTML = `<a href="${fullLink}" target="_blank">Click here to create your folder</a>`;
-    } else {
-        document.getElementById('output').innerText = "Please enter a valid email address.";
-    }
-});
+    <script>
+        document.getElementById('generateLink').addEventListener('click', function() {
+            const email = document.getElementById('email').value.trim();
+            if (email) {
+                // Set the email in the hidden form field
+                document.getElementById('hiddenEmail').value = email;
+                // Submit the form
+                document.getElementById('emailForm').submit();
+            } else {
+                document.getElementById('output').innerText = "Please enter a valid email address.";
+            }
+        });
     </script>
 </body>
 </html>
