@@ -92,17 +92,18 @@
         <p class="output" id="output"></p>
     </div>
     <script>
-        document.getElementById('generateLink').addEventListener('click', function() {
-            const email = document.getElementById('email').value.trim();
-            if (email) {
-                const baseLink = "https://script.google.com/macros/s/AKfycbwEpu_sLkuayU9_KpwSzDxTja3HWBUSgyGQDjAz2kbhgHq47SkD1IirmSMq9RQv7EHUbw/exec?templateId=1R5LTOkFf4U6w6DLcdyHxm0li2otyT1Dd&email=";
-                // Generate the link and ensure proper encoding
-                const fullLink = baseLink + encodeURIComponent(email);
-                document.getElementById('output').innerHTML = `<a href="${fullLink}" target="_blank">Click here to create your folder</a>`;
-            } else {
-                document.getElementById('output').innerText = "Please enter a valid email address.";
-            }
-        });
+document.getElementById('generateLink').addEventListener('click', function() {
+    const email = document.getElementById('email').value.trim();
+    if (email) {
+        const baseLink = "https://script.google.com/macros/s/AKfycbwEpu_sLkuayU9_KpwSzDxTja3HWBUSgyGQDjAz2kbhgHq47SkD1IirmSMq9RQv7EHUbw/exec?templateId=1R5LTOkFf4U6w6DLcdyHxm0li2otyT1Dd&email=";
+        const encodedLink = baseLink + encodeURIComponent(email);
+        const displayLink = baseLink + email; // Unencoded version for display
+
+        document.getElementById('output').innerHTML = `<a href="${encodedLink}" target="_blank">${displayLink}</a>`;
+    } else {
+        document.getElementById('output').innerText = "Please enter a valid email address.";
+    }
+});
     </script>
 </body>
 </html>
