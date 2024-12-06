@@ -132,17 +132,30 @@
 
     <script>
         document.getElementById('generateLink').addEventListener('click', function() {
-            const stageName = document.getElementById('stageName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            
-            if (stageName && email) {
-                // Set the values in the hidden form fields
-                document.getElementById('hiddenStageName').value = stageName;
-                document.getElementById('hiddenEmail').value = email;
-                // Submit the form
-                document.getElementById('emailForm').submit();
-            } else {
-                document.getElementById('output').innerText = "Please enter both your stage name and email address.";
+    const stageName = document.getElementById('stageName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    
+    if (stageName && email) {
+        // Stage Name exists, use it for folder name
+        document.getElementById('hiddenStageName').value = stageName;
+        document.getElementById('hiddenEmail').value = email;
+    } else if (stageName) {
+        // If only Stage Name is entered
+        document.getElementById('hiddenStageName').value = stageName;
+        document.getElementById('hiddenEmail').value = '';  // Clear email
+    } else if (email) {
+        // If only Email is entered (fallback)
+        document.getElementById('hiddenStageName').value = email;  // Use email as stage name if no stage name entered
+        document.getElementById('hiddenEmail').value = email;
+    } else {
+        document.getElementById('output').innerText = "Please enter both your stage name and email address.";
+        return;  // Do not submit the form if no input is provided
+    }
+
+    // Submit the form
+    document.getElementById('emailForm').submit();
+});
+
             }
         });
     </script>
